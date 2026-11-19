@@ -25,7 +25,15 @@ print("ref bytes:", os.path.getsize(REF_WAV))
 chunks=split_script("script.txt"); print("chunks:", len(chunks))
 t0=time.time()
 from transformers import AutoModel
-model=AutoModel.from_pretrained("ai4bharat/IndicF5", trust_remote_code=True)
+import torch
+try:
+    model=AutoModel.from_pretrained("ai4bharat/IndicF5", trust_remote_code=True, low_cpu_mem_usage=False)
+except TypeError:
+    model=AutoModel.from_pretrained("ai4bharat/IndicF5", trust_remote_code=True)
+try:
+    model=model.to(torch.device("cpu"))
+except Exception as e:
+    print("to(cpu) warn:", str(e)[:120])
 print("model loaded in", round(time.time()-t0,1),"s")
 
 SR=24000; pieces=[]
