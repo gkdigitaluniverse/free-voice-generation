@@ -1,2 +1,38 @@
 F5API START Thu Nov 19 16:48:28 UTC 2026
 INSTALL OK Thu Nov 19 16:51:12 UTC 2026
+GEN START Thu Nov 19 16:51:13 UTC 2026
+script: script2.txt
+chunks: 10
+weights: /home/runner/.cache/huggingface/hub/models--ai4bharat--IndicF5/snapshots/fb652a96e508091045890dae5bb99fe511facbcf/model.safetensors 1402789408
+/opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages/google/api_core/_python_version_support.py:212: FutureWarning: You are using a non-supported Python version (3.10.22). Google will not post any further updates to google.api_core supporting this Python version. Please upgrade to the latest Python version, or at least Python 3.11, and then update google.api_core.
+  warnings.warn(message, FutureWarning)
+/opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages/torch/jit/_script.py:1491: FutureWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+Building prefix dict from the default dictionary ...
+Dumping model to file cache /tmp/jieba.cache
+Loading model cost 0.603 seconds.
+Prefix dict has been built successfully.
+Word segmentation module jieba initialized.
+
+load_model accepts 7 params
+monkeypatch applied
+Download Vocos from huggingface charactr/vocos-mel-24khz
+
+vocab :  vocos
+token :  custom
+Traceback (most recent call last):
+  File "/home/runner/work/free-voice-generation/free-voice-generation/generate_f5api.py", line 46, in <module>
+    tts = F5TTS(model_type="F5-TTS", ckpt_file=ckpt, vocab_file=vocab,
+  File "/opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages/f5_tts/api.py", line 54, in __init__
+    self.load_ema_model(
+  File "/opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages/f5_tts/api.py", line 84, in load_ema_model
+    self.ema_model = load_model(
+  File "/home/runner/work/free-voice-generation/free-voice-generation/generate_f5api.py", line 40, in _safe_load_model
+    return _orig_load_model(*a[:_nparams], **k)
+  File "/opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages/f5_tts/infer/utils_infer.py", line 239, in load_model
+    vocab_char_map, vocab_size = get_tokenizer(vocab_file, tokenizer)
+  File "/opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages/f5_tts/model/utils.py", line 125, in get_tokenizer
+    with open(dataset_name, "r", encoding="utf-8") as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'vocos'
+GEN EXIT=1 Thu Nov 19 16:51:30 UTC 2026
+-rw-r--r-- 1 runner runner 409776 Nov 19 16:48 output.mp3
