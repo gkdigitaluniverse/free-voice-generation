@@ -49,11 +49,33 @@ print("infer_process signature:", inspect.signature(infer_process), flush=True)
 cfg = dict(dim=1024, depth=22, heads=16, ff_mult=2, text_dim=512, conv_layers=4)
 params = inspect.signature(load_model).parameters
 kw = {}
-for k, v in dict(mel_spec_type="vocos", vocab_file=vocab, ode_method="euler", use_ema=True).items():
+for k, v in dict(mel_spec_type="vocos", vocab_file=vocab, ode_method="euler", use_ema=True, device="cpu").items():
     if k in params: kw[k] = v
-print("passing kwargs:", list(kw), flush=True)
-model = load_model(DiT, cfg, ckpt, **kw)
-print("model loaded in", round(time.time()-t0,1),"s", flush=True)
+print("load_model kwargs:", list(kw), flush=True)
+model = load_model(DiT, cfg, **kw)
+print("model built in", round(time.time()-t0,1),"s", flush=True)
+
+# the newer f5_tts loads weights separately
+LC = UI.load_checkpoint
+print("load_checkpoint signature:", inspect.signature(LC), flush=True)
+lc_ok = False
+for attempt in (
+    lambda: LC(model, ckpt, device="cpu"),
+    lambda: LC(model, ckpt_file=ckpt, device="cpu"),
+    lambda: LC(model, ckpt),
+    lambda: LC(model, ckpt_file=ckpt),
+):
+    try:
+        r = attempt()
+        model = r if r is not None else model
+        lc_ok = True
+        print("checkpoint loaded", flush=True)
+        break
+    except Exception as e:
+        print("  lc attempt failed:", str(e)[:120], flush=True)
+if not lc_ok:
+    print("WARNING: could not load checkpoint, model may be random", flush=True)
+model = model.to("cpu").eval()
 
 vparams = inspect.signature(load_vocoder).parameters
 vkw = {}
