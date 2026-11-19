@@ -25,42 +25,41 @@ chunks=split_script(SCRIPT); print("chunks:", len(chunks), flush=True)
 
 t0=time.time()
 from huggingface_hub import hf_hub_download
-ckpt = hf_hub_download("ai4bharat/IndicF5", "model.safetensors")
 vocab = hf_hub_download("ai4bharat/IndicF5", "checkpoints/vocab.txt")
-print("weights:", ckpt, os.path.getsize(ckpt), flush=True)
-
-# MONKEYPATCH: the installed f5_tts api passes one extra positional arg to load_model
-import inspect as _insp
-import f5_tts.api as _api
-_orig_load_model = _api.load_model
+print("vocab:", vocab, flush=True)
 try:
-    _nparams = len(_insp.signature(_orig_load_model).parameters)
-    print("load_model accepts", _nparams, "params", flush=True)
-    def _safe_load_model(*a, **k):
-        return _orig_load_model(*a[:_nparams], **k)
-    _api.load_model = _safe_load_model
-    print("monkeypatch applied", flush=True)
-except Exception as _e:
-    print("monkeypatch skipped:", str(_e)[:150], flush=True)
-from f5_tts.api import F5TTS
-tts = F5TTS(model_type="F5-TTS", ckpt_file=ckpt, vocab_file=vocab,
-            vocoder_name="vocos", device="cpu")
-print("F5TTS loaded in", round(time.time()-t0,1), "s", flush=True)
+    ckpt = hf_hub_download("Saravananravi/indicf5-hinglish", "model.safetensors")
+    print("USING hinglish model:", ckpt, os.path.getsize(ckpt), flush=True)
+except Exception as e:
+    print("hinglish fetch failed:", str(e)[:200], flush=True)
+    ckpt = hf_hub_download("ai4bharat/IndicF5", "model.safetensors")
+    print("fallback to IndicF5:", ckpt, flush=True)
+
+import torch, soundfile
+from f5_tts.model import DiT
+from f5_tts.infer.utils_infer import load_model, load_vocoder, infer_process
+
+cfg = dict(dim=1024, depth=22, heads=16, ff_mult=2, text_dim=512, conv_layers=4)
+print("loading model (kwargs, no positional)", flush=True)
+model = load_model(DiT, cfg, ckpt, mel_spec_type="vocos", vocab_file=vocab,
+                   ode_method="euler", use_ema=True)
+print("model loaded in", round(time.time()-t0,1),"s", flush=True)
+vocoder = load_vocoder(vocoder_name="vocos", is_local=False, local_path=None, device="cpu")
+print("vocoder loaded", flush=True)
 
 SR=24000; pieces=[]
 for i,c in enumerate(chunks,1):
-    t1=time.time(); p=f"part{i}.wav"
-    try:
-        tts.infer(ref_file=REF_WAV, ref_text=ref_text, gen_text=c, file_wave=p, show_info=print)
-    except Exception as e:
-        print("chunk",i,"FAILED:",str(e)[:300], flush=True); raise
-    a,sr=sf.read(p, dtype="float32")
+    t1=time.time()
+    wav, sr, spec = infer_process(REF_WAV, ref_text, c, model, vocoder,
+                                  mel_spec_type="vocos", device="cpu", show_info=print)
+    a=np.array(wav, dtype=np.float32).squeeze()
     if sr!=SR:
-        subprocess.run(["ffmpeg","-y","-v","error","-i",p,"-ar",str(SR),"-ac","1",p], check=False)
-        a,sr=sf.read(p, dtype="float32")
-    a=a.squeeze().astype(np.float32); dur=len(a)/SR
+        sf.write("tmp.wav", a, sr)
+        subprocess.run(["ffmpeg","-y","-v","error","-i","tmp.wav","-ar",str(SR),"-ac","1","tmp2.wav"], check=False)
+        a,sr=sf.read("tmp2.wav", dtype="float32")
+    dur=len(a)/SR
     print(f"  chunk {i}: {dur:.1f}s in {round(time.time()-t1,1)}s", flush=True)
-    pieces.append(a); pieces.append(np.zeros(int(SR*GAP_MS/1000),dtype=np.float32))
+    pieces.append(a.astype(np.float32)); pieces.append(np.zeros(int(SR*GAP_MS/1000),dtype=np.float32))
 
 audio=np.concatenate(pieces) if pieces else np.zeros(SR,dtype=np.float32)
 print("raw total:", round(len(audio)/SR,2),"s", flush=True)
