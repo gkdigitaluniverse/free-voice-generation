@@ -1,2 +1,27 @@
 F5API START Thu Nov 19 16:44:34 UTC 2026
 INSTALL OK Thu Nov 19 16:47:21 UTC 2026
+GEN START Thu Nov 19 16:47:23 UTC 2026
+script: script2.txt
+chunks: 10
+weights: /home/runner/.cache/huggingface/hub/models--ai4bharat--IndicF5/snapshots/fb652a96e508091045890dae5bb99fe511facbcf/model.safetensors 1402789408
+/opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages/google/api_core/_python_version_support.py:212: FutureWarning: You are using a non-supported Python version (3.10.22). Google will not post any further updates to google.api_core supporting this Python version. Please upgrade to the latest Python version, or at least Python 3.11, and then update google.api_core.
+  warnings.warn(message, FutureWarning)
+/opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages/torch/jit/_script.py:1491: FutureWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+Building prefix dict from the default dictionary ...
+Dumping model to file cache /tmp/jieba.cache
+Loading model cost 0.395 seconds.
+Prefix dict has been built successfully.
+Word segmentation module jieba initialized.
+
+Download Vocos from huggingface charactr/vocos-mel-24khz
+Traceback (most recent call last):
+  File "/home/runner/work/free-voice-generation/free-voice-generation/generate_f5api.py", line 33, in <module>
+    tts = F5TTS(model_type="F5-TTS", ckpt_file=ckpt, vocab_file=vocab,
+  File "/opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages/f5_tts/api.py", line 54, in __init__
+    self.load_ema_model(
+  File "/opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages/f5_tts/api.py", line 84, in load_ema_model
+    self.ema_model = load_model(
+TypeError: load_model() takes from 2 to 7 positional arguments but 8 were given
+GEN EXIT=1 Thu Nov 19 16:47:43 UTC 2026
+-rw-r--r-- 1 runner runner 409776 Nov 19 16:44 output.mp3
