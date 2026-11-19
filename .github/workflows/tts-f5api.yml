@@ -36,7 +36,7 @@ jobs:
           set +e
           { python -m pip install --upgrade pip -q
             pip install -q "git+https://github.com/ai4bharat/IndicF5.git"
-            pip install -q torchdiffeq matplotlib pandas tqdm pyyaml requests
+            pip install -q torchdiffeq matplotlib pandas tqdm pyyaml requests torchcodec
             echo "INSTALL OK $(date -u)"
           } >> out/STATUS-F5.txt 2>&1
           git add -f out/STATUS-F5.txt && git commit -m "status: f5api install" || true
