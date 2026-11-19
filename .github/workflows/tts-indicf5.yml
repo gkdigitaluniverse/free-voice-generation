@@ -38,6 +38,7 @@ jobs:
           { python -m pip install --upgrade pip -q
             pip install -q "git+https://github.com/ai4bharat/IndicF5.git" --no-deps
             pip install -q torch==2.2.0 transformers==4.49.0 accelerate==0.33.0 pydub soundfile safetensors huggingface_hub==0.29.0 scipy==1.13.0 numpy==1.26.4 sentencepiece protobuf==4.25.3 torchaudio==2.2.0
+            pip install -q "x_transformers>=1.31.14" transformers_stream_generator vocos librosa einops omegaconf
             python -c "import transformers,torch;print('transformers',transformers.__version__,'torch',torch.__version__)"
             echo "INSTALL OK $(date -u)"
           } >> out/STATUS.txt 2>&1
