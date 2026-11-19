@@ -1,2 +1,41 @@
 F5API START Thu Nov 19 17:10:29 UTC 2026
 INSTALL OK Thu Nov 19 17:19:26 UTC 2026
+GEN START Thu Nov 19 17:19:28 UTC 2026
+script: script2.txt
+chunks: 10
+vocab: /home/runner/.cache/huggingface/hub/models--ai4bharat--IndicF5/snapshots/fb652a96e508091045890dae5bb99fe511facbcf/checkpoints/vocab.txt
+USING hinglish model: /home/runner/.cache/huggingface/hub/models--Saravananravi--indicf5-hinglish/snapshots/22c46e5a5cf6e5225709399e8565711377a6a746/model.safetensors 1348431976
+/opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages/torch/jit/_script.py:1491: FutureWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+Building prefix dict from the default dictionary ...
+Dumping model to file cache /tmp/jieba.cache
+Loading model cost 0.398 seconds.
+Prefix dict has been built successfully.
+Word segmentation module jieba initialized.
+
+utils_infer has: ['__loader__', 'hf_hub_download', 'infer_batch_process', 'infer_process', 'load_checkpoint', 'load_model', 'load_vocoder', 'snapshot_download']
+load_model signature: (model_cls, model_cfg, mel_spec_type='vocos', vocab_file='', ode_method='euler', use_ema=True, device='cpu')
+infer_process signature: (ref_audio, ref_text, gen_text, model_obj, vocoder, mel_spec_type='vocos', show_info=<built-in function print>, progress=<module 'tqdm' from '/opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages/tqdm/__init__.py'>, target_rms=0.1, cross_fade_duration=0.15, nfe_step=32, cfg_strength=2.0, sway_sampling_coef=-1.0, speed=1.0, fix_duration=None, device='cpu')
+load_model kwargs: ['mel_spec_type', 'vocab_file', 'ode_method', 'use_ema', 'device']
+
+vocab :  /home/runner/.cache/huggingface/hub/models--ai4bharat--IndicF5/snapshots/fb652a96e508091045890dae5bb99fe511facbcf/checkpoints/vocab.txt
+token :  custom
+model built in 17.6 s
+load_checkpoint signature: (model, ckpt_path, device: str, dtype=None, use_ema=True)
+checkpoint loaded
+Download Vocos from huggingface charactr/vocos-mel-24khz
+vocoder loaded
+  chunk 1: 6.3s in 160.5s
+  chunk 2: 4.2s in 134.9s
+  chunk 3: 4.8s in 145.4s
+  chunk 4: 7.2s in 175.5s
+  chunk 5: 4.9s in 147.8s
+  chunk 6: 5.6s in 157.0s
+  chunk 7: 4.9s in 138.8s
+  chunk 8: 6.3s in 155.3s
+  chunk 9: 5.4s in 150.0s
+  chunk 10: 8.3s in 183.9s
+raw total: 59.12 s
+SAVED output.mp3 544364
+GEN EXIT=0 Thu Nov 19 17:45:37 UTC 2026
+-rw-r--r-- 1 runner runner 544364 Nov 19 17:45 output.mp3
