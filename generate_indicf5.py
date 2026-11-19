@@ -1,4 +1,3 @@
-# indicf5 run 2
 import os, re, subprocess, time
 import numpy as np, soundfile as sf
 
@@ -24,25 +23,10 @@ print("ref bytes:", os.path.getsize(REF_WAV))
 
 chunks=split_script("script.txt"); print("chunks:", len(chunks))
 t0=time.time()
-import torch
 from transformers import AutoModel
-print("loading IndicF5 ...", flush=True)
-with torch.device("cpu"):
-    try:
-        model = AutoModel.from_pretrained("ai4bharat/IndicF5", trust_remote_code=True,
-                                          low_cpu_mem_usage=False, device_map=None, torch_dtype=torch.float32)
-    except Exception as e1:
-        print("load attempt 1 failed:", str(e1)[:200], flush=True)
-        model = AutoModel.from_pretrained("ai4bharat/IndicF5", trust_remote_code=True)
-# force every parameter off the meta device
-try:
-    for n, p_ in list(model.named_parameters()):
-        if p_.is_meta:
-            raise RuntimeError("param still meta: " + n)
-except Exception as e2:
-    print("meta check:", str(e2)[:200], flush=True)
-model = model.to(torch.device("cpu")).float().eval()
-print("model on cpu, dtype float32", flush=True)
+model=AutoModel.from_pretrained("ai4bharat/IndicF5", trust_remote_code=True)
+print("model loaded in", round(time.time()-t0,1),"s")
+
 SR=24000; pieces=[]
 for i,c in enumerate(chunks,1):
     t1=time.time()
