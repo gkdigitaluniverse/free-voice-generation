@@ -29,6 +29,19 @@ ckpt = hf_hub_download("ai4bharat/IndicF5", "model.safetensors")
 vocab = hf_hub_download("ai4bharat/IndicF5", "checkpoints/vocab.txt")
 print("weights:", ckpt, os.path.getsize(ckpt), flush=True)
 
+# MONKEYPATCH: the installed f5_tts api passes one extra positional arg to load_model
+import inspect as _insp
+import f5_tts.api as _api
+_orig_load_model = _api.load_model
+try:
+    _nparams = len(_insp.signature(_orig_load_model).parameters)
+    print("load_model accepts", _nparams, "params", flush=True)
+    def _safe_load_model(*a, **k):
+        return _orig_load_model(*a[:_nparams], **k)
+    _api.load_model = _safe_load_model
+    print("monkeypatch applied", flush=True)
+except Exception as _e:
+    print("monkeypatch skipped:", str(_e)[:150], flush=True)
 from f5_tts.api import F5TTS
 tts = F5TTS(model_type="F5-TTS", ckpt_file=ckpt, vocab_file=vocab,
             vocoder_name="vocos", device="cpu")
