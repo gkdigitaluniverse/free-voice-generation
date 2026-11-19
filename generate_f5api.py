@@ -35,23 +35,41 @@ except Exception as e:
     ckpt = hf_hub_download("ai4bharat/IndicF5", "model.safetensors")
     print("fallback to IndicF5:", ckpt, flush=True)
 
-import torch, soundfile
+import torch, soundfile, inspect
 from f5_tts.model import DiT
-from f5_tts.infer.utils_infer import load_model, load_vocoder, infer_process
+import f5_tts.infer.utils_infer as UI
+
+print("utils_infer has:", [n for n in dir(UI) if 'load' in n or 'infer' in n], flush=True)
+load_model = UI.load_model
+load_vocoder = UI.load_vocoder
+infer_process = UI.infer_process
+print("load_model signature:", inspect.signature(load_model), flush=True)
+print("infer_process signature:", inspect.signature(infer_process), flush=True)
 
 cfg = dict(dim=1024, depth=22, heads=16, ff_mult=2, text_dim=512, conv_layers=4)
-print("loading model (kwargs, no positional)", flush=True)
-model = load_model(DiT, cfg, ckpt, mel_spec_type="vocos", vocab_file=vocab,
-                   ode_method="euler", use_ema=True)
+params = inspect.signature(load_model).parameters
+kw = {}
+for k, v in dict(mel_spec_type="vocos", vocab_file=vocab, ode_method="euler", use_ema=True).items():
+    if k in params: kw[k] = v
+print("passing kwargs:", list(kw), flush=True)
+model = load_model(DiT, cfg, ckpt, **kw)
 print("model loaded in", round(time.time()-t0,1),"s", flush=True)
-vocoder = load_vocoder(vocoder_name="vocos", is_local=False, local_path=None, device="cpu")
+
+vparams = inspect.signature(load_vocoder).parameters
+vkw = {}
+for k, v in dict(vocoder_name="vocos", is_local=False, local_path=None, device="cpu").items():
+    if k in vparams: vkw[k] = v
+vocoder = load_vocoder(**vkw)
 print("vocoder loaded", flush=True)
 
 SR=24000; pieces=[]
 for i,c in enumerate(chunks,1):
     t1=time.time()
-    wav, sr, spec = infer_process(REF_WAV, ref_text, c, model, vocoder,
-                                  mel_spec_type="vocos", device="cpu", show_info=print)
+    ip = inspect.signature(infer_process).parameters
+    ikw = {}
+    for k, v in dict(mel_spec_type="vocos", device="cpu", show_info=print).items():
+        if k in ip: ikw[k] = v
+    wav, sr, spec = infer_process(REF_WAV, ref_text, c, model, vocoder, **ikw)
     a=np.array(wav, dtype=np.float32).squeeze()
     if sr!=SR:
         sf.write("tmp.wav", a, sr)
