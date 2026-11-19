@@ -28,3 +28,30 @@ f5-tts 0.1.0 requires torchdiffeq, which is not installed.
 f5-tts 0.1.0 requires wandb, which is not installed.
 transformers 4.49.0 torch 2.14.1+cu130
 INSTALL OK Thu Nov 19 16:12:14 UTC 2026
+GENERATE START Thu Nov 19 16:12:16 UTC 2026
+ref bytes: 355278
+chunks: 7
+Traceback (most recent call last):
+  File "/home/runner/work/free-voice-generation/free-voice-generation/generate_indicf5.py", line 27, in <module>
+    model=AutoModel.from_pretrained("ai4bharat/IndicF5", trust_remote_code=True)
+  File "/opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages/transformers/models/auto/auto_factory.py", line 526, in from_pretrained
+    config, kwargs = AutoConfig.from_pretrained(
+  File "/opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages/transformers/models/auto/configuration_auto.py", line 1084, in from_pretrained
+    config_class = get_class_from_dynamic_module(
+  File "/opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages/transformers/dynamic_module_utils.py", line 553, in get_class_from_dynamic_module
+    return get_class_in_module(class_name, final_module, force_reload=force_download)
+  File "/opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages/transformers/dynamic_module_utils.py", line 250, in get_class_in_module
+    module_spec.loader.exec_module(module)
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/runner/.cache/huggingface/modules/transformers_modules/ai4bharat/IndicF5/fb652a96e508091045890dae5bb99fe511facbcf/model.py", line 10, in <module>
+    from f5_tts.infer.utils_infer import (
+  File "/opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages/f5_tts/infer/utils_infer.py", line 28, in <module>
+    from f5_tts.model import CFM
+  File "/opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages/f5_tts/model/__init__.py", line 1, in <module>
+    from f5_tts.model.cfm import CFM
+  File "/opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages/f5_tts/model/cfm.py", line 19, in <module>
+    from torchdiffeq import odeint
+ModuleNotFoundError: No module named 'torchdiffeq'
+GENERATE EXIT=1 Thu Nov 19 16:12:21 UTC 2026
+-rw-r--r-- 1 runner runner 409776 Nov 19 16:08 output.mp3
