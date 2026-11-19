@@ -1,7 +1,7 @@
 name: tts-indicf5
 on:
   push:
-    paths: ["script.txt","generate_indicf5.py","ref_text.txt"]
+    paths: ["script.txt","generate_indicf5.py","ref_text.txt","run/**"]
   workflow_dispatch:
 jobs:
   gen:
@@ -13,6 +13,15 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with: { python-version: "3.10" }
+
+      - name: Start log
+        run: |
+          mkdir -p out
+          echo "START $(date -u)" > out/STATUS.txt
+          git config user.email ci@local && git config user.name ci
+          git add -f out/STATUS.txt && git commit -m "status: start" || true
+          git push || true
+
       - uses: actions/cache@v4
         with:
           path: ~/.cache/pip
@@ -23,22 +32,38 @@ jobs:
             ~/.cache/huggingface
             ~/.cache/torch
           key: hf-indicf5-${{ runner.os }}-v1
-      - run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+
+      - name: System deps
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+
       - name: Install IndicF5
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
-          python -m pip install --upgrade pip -q
-          pip install -q torch==2.2.0 transformers==4.49.0 accelerate==0.33.0 pydub soundfile safetensors huggingface_hub==0.29.0 scipy==1.13.0 numpy==1.26.4 sentencepiece protobuf==4.25.3
-          pip install -q "git+https://github.com/ai4bharat/IndicF5.git" 2>&1 | tail -3
+          set +e
+          { python -m pip install --upgrade pip -q
+            pip install -q torch==2.2.0 transformers==4.49.0 accelerate==0.33.0 pydub soundfile safetensors huggingface_hub==0.29.0 scipy==1.13.0 numpy==1.26.4 sentencepiece protobuf==4.25.3
+            pip install -q "git+https://github.com/ai4bharat/IndicF5.git"
+            echo "INSTALL OK $(date -u)"
+          } >> out/STATUS.txt 2>&1
+          git add -f out/STATUS.txt && git commit -m "status: install" || true
+          git push || true
+
       - name: Generate
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
-        run: python generate_indicf5.py 2>&1 | tail -40
-      - name: Commit
+        run: |
+          set +e
+          echo "GENERATE START $(date -u)" >> out/STATUS.txt
+          python generate_indicf5.py >> out/STATUS.txt 2>&1
+          echo "GENERATE EXIT=$? $(date -u)" >> out/STATUS.txt
+          ls -la output.mp3 >> out/STATUS.txt 2>&1
+          git add -f out/STATUS.txt && git commit -m "status: generate" || true
+          git push || true
+
+      - name: Publish audio
         run: |
           ls -la output.mp3 || exit 1
-          git config user.email ci@local && git config user.name ci
           git add -f output.mp3 && git commit -m "voice(indicf5): $(date -u +%Y-%m-%dT%H:%M)" || true
           git push || true
       - name: Release
