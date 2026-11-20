@@ -1,2 +1,46 @@
 F5API START Fri Nov 20 09:46:34 UTC 2026
 INSTALL OK Fri Nov 20 09:49:16 UTC 2026
+GEN START Fri Nov 20 09:49:17 UTC 2026
+script: script2.txt | chunks: 12
+  1. [excited] अगर आप कोडिंग सीख रहे हैं, तो यह वीडियो आपके हज़ार
+  2. [calm] GitHub Actions पर हर महीने दो हज़ार मिनट फ्री मिलत
+  3. [serious] लेकिन यह लिमिट आपके पूरे अकाउंट की है, हर रेपो की 
+  4. [serious] यानी दूसरा रेपो बनाने से आपको दो हज़ार मिनट और नही
+  5. [excited] अब असली ट्रिक सुनो।
+  6. [excited] अगर आपकी रेपो पब्लिक है, तो आपके मिनट गिने ही नहीं
+  7. [calm] स्टैंडर्ड रनर पब्लिक रेपो में पूरी तरह फ्री और अनल
+  8. [calm] मैंने यह खुद अपनी वीडियो पाइपलाइन पर इस्तेमाल किया
+  9. [calm] एक वीडियो रेंडर करने में तीन मिनट लगते हैं, और मेर
+  10. [excited] तो अगर आपका प्रोजेक्ट पब्लिक हो सकता है, तो उसे पब
+  11. [warning] लेकिन ध्यान रखना, पासवर्ड और API की कभी भी पब्लिक 
+  12. [serious] उसके लिए GitHub Secrets इस्तेमाल करो।
+weights: 1348431976
+/opt/hostedtoolcache/Python/3.10.22/x64/lib/python3.10/site-packages/torch/jit/_script.py:1491: FutureWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+Building prefix dict from the default dictionary ...
+Dumping model to file cache /tmp/jieba.cache
+Loading model cost 0.628 seconds.
+Prefix dict has been built successfully.
+Word segmentation module jieba initialized.
+
+
+vocab :  /home/runner/.cache/huggingface/hub/models--ai4bharat--IndicF5/snapshots/fb652a96e508091045890dae5bb99fe511facbcf/checkpoints/vocab.txt
+token :  custom
+Download Vocos from huggingface charactr/vocos-mel-24khz
+model + vocoder ready in 18.8 s
+  chunk 1 [excited cs=2.2 sp=1.22 nfe=16]: 5.1s in 143.2s
+  chunk 2 [calm cs=1.8 sp=1.18 nfe=16]: 3.5s in 125.3s
+  chunk 3 [serious cs=2.0 sp=1.16 nfe=16]: 4.1s in 129.0s
+  chunk 4 [serious cs=2.0 sp=1.16 nfe=16]: 4.6s in 136.9s
+  chunk 5 [excited cs=2.2 sp=1.22 nfe=16]: 1.4s in 94.4s
+  chunk 6 [excited cs=2.2 sp=1.22 nfe=16]: 4.0s in 128.1s
+  chunk 7 [calm cs=1.8 sp=1.18 nfe=16]: 4.7s in 136.1s
+  chunk 8 [calm cs=1.8 sp=1.18 nfe=16]: 4.2s in 129.3s
+  chunk 9 [calm cs=1.8 sp=1.18 nfe=16]: 5.3s in 145.6s
+  chunk 10 [excited cs=2.2 sp=1.22 nfe=16]: 4.4s in 132.2s
+  chunk 11 [warning cs=2.3 sp=1.1 nfe=16]: 5.2s in 141.7s
+  chunk 12 [serious cs=2.0 sp=1.16 nfe=16]: 2.2s in 102.8s
+raw total: 50.14 s
+SAVED output.mp3 646316
+GEN EXIT=0 Fri Nov 20 10:15:24 UTC 2026
+-rw-r--r-- 1 runner runner 646316 Nov 20 10:15 output.mp3
