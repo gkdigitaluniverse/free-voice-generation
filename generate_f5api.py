@@ -7,11 +7,12 @@ SCRIPT = sys.argv[1] if len(sys.argv)>1 else "script.txt"
 
 # mood -> (cfg_strength, speed)
 MOODS = {
-  "excited": (2.6, 1.22),
-  "calm":    (2.0, 1.18),
-  "serious": (2.3, 1.16),
-  "warning": (2.8, 1.10),
+  "excited": (2.2, 1.22),
+  "calm":    (1.8, 1.18),
+  "serious": (2.0, 1.16),
+  "warning": (2.3, 1.10),
 }
+NFE = 16
 
 def parse_script(path):
     out=[]
@@ -57,7 +58,7 @@ for i,(mood,txt) in enumerate(items,1):
     t1=time.time()
     ip = inspect.signature(UI.infer_process).parameters
     ikw = {k:v for k,v in dict(mel_spec_type="vocos", device="cpu", show_info=lambda *a,**k: None,
-            cfg_strength=cs, speed=spd).items() if k in ip}
+            cfg_strength=cs, speed=spd, nfe_step=NFE).items() if k in ip}
     wav, sr, spec = UI.infer_process(REF_WAV, ref_text, txt, model, vocoder, **ikw)
     a=np.array(wav, dtype=np.float32).squeeze()
     if sr!=SR:
@@ -65,7 +66,7 @@ for i,(mood,txt) in enumerate(items,1):
         subprocess.run(["ffmpeg","-y","-v","error","-i","t.wav","-ar",str(SR),"-ac","1","t2.wav"], check=False)
         a,sr=sf.read("t2.wav", dtype="float32")
     dur=len(a)/SR
-    print(f"  chunk {i} [{mood} cs={cs} sp={spd}]: {dur:.1f}s in {round(time.time()-t1,1)}s", flush=True)
+    print(f"  chunk {i} [{mood} cs={cs} sp={spd} nfe={NFE}]: {dur:.1f}s in {round(time.time()-t1,1)}s", flush=True)
     pieces.append(a.astype(np.float32)); pieces.append(np.zeros(int(SR*GAP_MS/1000),dtype=np.float32))
 
 audio=np.concatenate(pieces) if pieces else np.zeros(SR,dtype=np.float32)
