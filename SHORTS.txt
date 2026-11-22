@@ -1,0 +1,94 @@
+date: Sun Nov 22 14:12:49 UTC 2026
+yt-dlp: 2026.10.26
+
+############ @explivolt ############
+--- /shorts ---
+qFwZhBrMYhI | NA | Why AI runs on GPUs, not CPUs
+7Na5g1DRLY4 | NA | 100 Mbps plan but only 12 MB/s download? It's not a scam, it's math
+IPrp7rOWNXQ | NA | Anthropic IPO: the biggest IPO ever, and why India was left out
+0yPge40Tq04 | NA | Unified Memory Explained
+YL6b6yWpIB0 | NA | How a 16GB Mac beats a 32GB PC: unified memory explained
+q7a2bg5oTcM | NA | How Claude actually works: tokens, models, connectors and skills
+L8qshPOVbdE | NA | Is the iPhone really more secure than Android?
+bSWbhQa5cOQ | NA | WhatsApp storage full? Turn this setting off
+exit=0
+--- plain handle (in case shorts tab missing) ---
+ezxA4BuMRfM | 541 | How to Create Hindi Reels with Claude Code (Full Tutorial) | Write a Topic, Reel Ready
+taxKAPHj38w | 395 | The iPhone 18 Pro Camera Has Moving Blades. Here's What They Do.
+qFwZhBrMYhI | NA | Why AI runs on GPUs, not CPUs
+7Na5g1DRLY4 | NA | 100 Mbps plan but only 12 MB/s download? It's not a scam, it's math
+IPrp7rOWNXQ | NA | Anthropic IPO: the biggest IPO ever, and why India was left out
+0yPge40Tq04 | NA | Unified Memory Explained
+YL6b6yWpIB0 | NA | How a 16GB Mac beats a 32GB PC: unified memory explained
+q7a2bg5oTcM | NA | How Claude actually works: tokens, models, connectors and skills
+L8qshPOVbdE | NA | Is the iPhone really more secure than Android?
+bSWbhQa5cOQ | NA | WhatsApp storage full? Turn this setting off
+exit=0
+
+############ @puretechlens ############
+--- /shorts ---
+UFeAIQNe554 | NA | Who is the smartest AI over 3 years? #ai #llm
+_gwAa9o49nE | NA | Why your AI emails sound fake (and how to fix it) #ai #emailmarketing
+yHsqBe4UdG0 | NA | How to build a free AI sales team #AI #OpenSource #Business
+FCi_YF3GPGY | NA | Own Claude now, thanks to Anthropic IPO #finance #ai #tech
+wtNj4nknR1M | NA | Claude Missed a Dangerous Command 1 in 3 Times. Here's Why #ai #shorts
+STFYhx06jM8 | NA | Elon Musk's crazy life in 2 min #elonmusk #spacex #
+RVXro2c7tyE | NA | Paid AI Tools That You Can Replace for Free #ai #subscription #tech
+2CCls1R0GNQ | NA | Jensen Huang Is Out at Nvidia: What Actually Happened #nvidia #jensenhuang
+exit=0
+--- plain handle (in case shorts tab missing) ---
+ofXS6uog6nU | 415 | Traveling Salesman Problem, P vs NP, NP-Hard and NP-Complete Explained Like An 8th Grader
+tUOiHJN4hPM | 388 | Why Quantum Computers Could Change Everything
+IziJL_7O080 | 362 | Why AI Sounds Confident (But Could be Wrong) - Easy Explanation
+kH16dwX6iDM | 1640 | GPT-5.6 vs Claude Fable 5: One-Shot SaaS App Build Showdown (You Won't Believe the UI)
+muse5f9JMX0 | 317 | Fable Built an AI Property Manager App to Replace My Real Property Manager
+hG7iXjUfuTc | 336 | Claude Connector for Stripe Payments in 5 Minutes (Sandbox MCP & Skills Setup)
+SngfYMiyK4U | 37 | Upload 1,000+ Printify Products in MINUTES (Not Hours) -  EasyBulkPOD.com
+X0xyU6eKz_0 | 1644 | Fable 5 Built a Full Job Search App From One Prompt But With Bugs
+UFeAIQNe554 | NA | Who is the smartest AI over 3 years? #ai #llm
+_gwAa9o49nE | NA | Why your AI emails sound fake (and how to fix it) #ai #emailmarketing
+exit=0
+
+############ @insiderforce ############
+--- /shorts ---
+Tjkk7rFqYPQ | NA | Cursor, Codex, Claude Code Users : How to Get Your Whole Team on One AI Agent With Shared Skills
+iL7T0P48i-A | NA | How to Build and Sell Full Apps With AI Agents Running Your Business 24/7, No Code Needed
+jlPVufdNQm4 | NA | ChatGPT Can Now Create and Run a Professional AI Influencer Using CapCut
+IDe-B7UEojs | NA | How to Automate Your Entire Business With an AI Agent, No Code Needed
+23cUNfHdJcc | NA | Claude Code Can Now Launch Any Website It Builds Live on the Internet for Free - AweShell
+j5-XLj2E9g4 | NA | You Can Now Build Immersive Websites using AI and Rank It on Google, ChatGPT, Perplexity - No Code
+qGuDcRRJAD4 | NA | Top 5 Free Claude Code Plugins Every Vibe Coder Needs Before They Ship
+RKZOKc51wz4 | NA | Free GitHub Repo That Could End Your AI API Bill Forever
+exit=0
+--- plain handle (in case shorts tab missing) ---
+Tjkk7rFqYPQ | NA | Cursor, Codex, Claude Code Users : How to Get Your Whole Team on One AI Agent With Shared Skills
+iL7T0P48i-A | NA | How to Build and Sell Full Apps With AI Agents Running Your Business 24/7, No Code Needed
+jlPVufdNQm4 | NA | ChatGPT Can Now Create and Run a Professional AI Influencer Using CapCut
+IDe-B7UEojs | NA | How to Automate Your Entire Business With an AI Agent, No Code Needed
+23cUNfHdJcc | NA | Claude Code Can Now Launch Any Website It Builds Live on the Internet for Free - AweShell
+j5-XLj2E9g4 | NA | You Can Now Build Immersive Websites using AI and Rank It on Google, ChatGPT, Perplexity - No Code
+qGuDcRRJAD4 | NA | Top 5 Free Claude Code Plugins Every Vibe Coder Needs Before They Ship
+RKZOKc51wz4 | NA | Free GitHub Repo That Could End Your AI API Bill Forever
+exit=0
+
+############ @apnaaischool ############
+--- /shorts ---
+BJOXyyTjtzY | NA | GTA 6 Game Tech That Changes Open World Gaming
+lrxMdB9ftYk | NA | How AI NPC Mechanics Work in GTA 6
+g1cARoOA1Vs | NA | Turn Rough Ideas into Full Video Scripts with Gemini
+ErxYN7wf74o | NA | New Free Al Voice Generator: ElevenLabs Alternative
+dykqc8JZmSc | NA | How to Test 3 Thumbnails on YouTube Studio
+q0z9tz7Wj4U | NA | 3 Secret AI Design Tools Every Creator Needs! 🎨🔥 #AITools
+cZqPUZmdsrQ | NA | 3 Insane AI Video Tools You Haven't Seen Yet! 🤯🔥
+QFrDN2yvv4w | NA | 3 Secret AI Audio Tools Every Creator Needs! 🎙️
+exit=0
+--- plain handle (in case shorts tab missing) ---
+BJOXyyTjtzY | NA | GTA 6 Game Tech That Changes Open World Gaming
+lrxMdB9ftYk | NA | How AI NPC Mechanics Work in GTA 6
+g1cARoOA1Vs | NA | Turn Rough Ideas into Full Video Scripts with Gemini
+ErxYN7wf74o | NA | New Free Al Voice Generator: ElevenLabs Alternative
+dykqc8JZmSc | NA | How to Test 3 Thumbnails on YouTube Studio
+q0z9tz7Wj4U | NA | 3 Secret AI Design Tools Every Creator Needs! 🎨🔥 #AITools
+cZqPUZmdsrQ | NA | 3 Insane AI Video Tools You Haven't Seen Yet! 🤯🔥
+QFrDN2yvv4w | NA | 3 Secret AI Audio Tools Every Creator Needs! 🎙️
+exit=0
