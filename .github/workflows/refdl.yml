@@ -4,9 +4,9 @@ on:
     paths: ["dl/**"]
   workflow_dispatch:
 jobs:
-  dl:
+  s:
     runs-on: ubuntu-latest
-    timeout-minutes: 40
+    timeout-minutes: 20
     permissions:
       contents: write
     steps:
@@ -14,51 +14,28 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - name: Install
+      - run: python -m pip install -q --upgrade yt-dlp
+      - name: List shorts only
         run: |
-          python -m pip install -q --upgrade yt-dlp
-          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
-      - name: Find insiderforce videos
-        run: |
-          exec > DL-REPORT.txt 2>&1
+          exec > SHORTS.txt 2>&1
           echo "date: $(date -u)"
-          echo "=== insiderforce discovery ==="
-          for P in "https://www.youtube.com/@insiderforce/videos" "https://www.youtube.com/@insiderforce/shorts" "https://www.youtube.com/@insiderforce/streams" "https://www.youtube.com/@insiderforce"; do
-            echo "--- $P ---"
-            yt-dlp --flat-playlist --playlist-end 6 --print "%(id)s | %(duration)s | %(title)s" "$P" 2>&1 | head -8
-            echo "exit=$?"
-          done
-      - name: Download 3-4 per channel
-        run: |
-          exec >> DL-REPORT.txt 2>&1
-          mkdir -p out
-          echo
-          echo "=== DOWNLOADS ==="
-          IDS="ezxA4BuMRfM taxKAPHj38w ofXS6uog6nU tUOiHJN4hPM IziJL_7O080 muse5f9JMX0"
-          for ID in $IDS; do
-            echo "--- $ID ---"
-            yt-dlp -f "bv*[height<=480][ext=mp4]+ba[ext=m4a]/b[height<=480]/b" \
-              --merge-output-format mp4 -o "out/%(id)s.%(ext)s" \
-              --no-playlist --retries 3 --socket-timeout 30 \
+          echo "yt-dlp: $(yt-dlp --version)"
+          for H in explivolt puretechlens insiderforce apnaaischool; do
+            echo
+            echo "############ @$H ############"
+            echo "--- /shorts ---"
+            yt-dlp --flat-playlist --playlist-end 8 --print "%(id)s | %(duration)s | %(title)s" \
               --extractor-args "youtube:player_client=web" \
-              "https://www.youtube.com/watch?v=$ID" 2>&1 | tail -4
+              "https://www.youtube.com/@$H/shorts" 2>&1 | head -10
+            echo "exit=$?"
+            echo "--- plain handle (in case shorts tab missing) ---"
+            yt-dlp --flat-playlist --playlist-end 8 --print "%(id)s | %(duration)s | %(title)s" \
+              --extractor-args "youtube:player_client=web" \
+              "https://www.youtube.com/@$H" 2>&1 | head -10
             echo "exit=$?"
           done
-          echo
-          echo "=== FILES ==="
-          ls -la out/ 2>/dev/null
-          du -sh out 2>/dev/null
-      - name: Upload to release
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          gh release create refs-$(date +%Y%m%d) --title "reference videos" --notes "reference downloads" 2>/dev/null || true
-          for f in out/*.mp4; do
-            [ -f "$f" ] && gh release upload refs-$(date +%Y%m%d) "$f" --clobber 2>&1 | tail -2
-          done
-          gh release view refs-$(date +%Y%m%d) --json assets --jq '.assets[] | "\(.name) \(.size) \(.url)"' >> DL-REPORT.txt 2>&1 || true
-      - name: Commit report
+      - name: Commit
         run: |
           git config user.email ci@local && git config user.name ci
-          git add -f DL-REPORT.txt && git commit -m "refdl: downloads" || true
+          git add -f SHORTS.txt && git commit -m "refs: shorts listing for 4 channels" || true
           git push || true
