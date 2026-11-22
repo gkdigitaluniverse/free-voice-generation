@@ -1,0 +1,34 @@
+date: Sun Nov 22 14:05:19 UTC 2026
+yt-dlp: 2026.10.26
+
+=============== https://www.youtube.com/@explivolt ===============
+--- client: web ---
+ezxA4BuMRfM | 541 | How to Create Hindi Reels with Claude Code (Full Tutorial) | Write a Topic, Reel Ready
+taxKAPHj38w | 395 | The iPhone 18 Pro Camera Has Moving Blades. Here's What They Do.
+exit=0
+WORKS: web
+
+=============== https://www.youtube.com/@puretechlens ===============
+--- client: web ---
+ofXS6uog6nU | 415 | Traveling Salesman Problem, P vs NP, NP-Hard and NP-Complete Explained Like An 8th Grader
+tUOiHJN4hPM | 388 | Why Quantum Computers Could Change Everything
+IziJL_7O080 | 362 | Why AI Sounds Confident (But Could be Wrong) - Easy Explanation
+kH16dwX6iDM | 1640 | GPT-5.6 vs Claude Fable 5: One-Shot SaaS App Build Showdown (You Won't Believe the UI)
+muse5f9JMX0 | 317 | Fable Built an AI Property Manager App to Replace My Real Property Manager
+hG7iXjUfuTc | 336 | Claude Connector for Stripe Payments in 5 Minutes (Sandbox MCP & Skills Setup)
+exit=0
+WORKS: web
+
+=============== https://www.youtube.com/@insiderforce ===============
+--- client: web ---
+ERROR: [youtube:tab] @insiderforce: This channel does not have a videos tab
+exit=1
+--- client: android ---
+ERROR: [youtube:tab] @insiderforce: This channel does not have a videos tab
+exit=1
+--- client: ios ---
+ERROR: [youtube:tab] @insiderforce: This channel does not have a videos tab
+exit=1
+--- client: tv ---
+ERROR: [youtube:tab] @insiderforce: This channel does not have a videos tab
+exit=1
