@@ -1,0 +1,43 @@
+name: getmp3
+on:
+  push:
+    paths: ["dl/**"]
+  workflow_dispatch:
+jobs:
+  g:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download the mp3
+        run: |
+          exec > MP3-REPORT.txt 2>&1
+          echo "date: $(date -u)"
+          URL='https://elevenlabsusercontent.com/database/workspace/66f2b42f1c6d4839af89eb4b92f33586/content_generation/5fBfuJDfTVdkWFoFXPF2/ZHtIf0rALbjp2nsKADq6/content.mp3?Expires=1795442400&KeyName=assets-cdn-key-1&Signature=RiGts_GCQnFwYFUSuvaKNXSftbU='
+          echo "attempt 1: plain curl"
+          curl -sL --max-time 120 -A "Mozilla/5.0" "$URL" -o got.mp3 -w "HTTP %{http_code} bytes %{size_download}\n" || echo "curl failed $?"
+          file got.mp3 2>/dev/null
+          head -c 200 got.mp3 | strings | head -3
+          if ! head -c 3 got.mp3 | grep -q "ID3"; then
+            echo "attempt 2: wget"
+            wget -q -O got2.mp3 --timeout=120 --user-agent="Mozilla/5.0" "$URL" && echo "wget ok $(stat -c%s got2.mp3)" || echo "wget failed"
+            if head -c 3 got2.mp3 | grep -q "ID3"; then cp got2.mp3 got.mp3; fi
+          fi
+          if head -c 3 got.mp3 | grep -q "ID3"; then
+            echo "SUCCESS $(stat -c%s got.mp3) bytes"
+            cp got.mp3 content.mp3
+            ffprobe -v error -show_entries format=duration,bit_rate -of default=nw=1 content.mp3 2>&1
+          else
+            echo "FAILED — not audio"
+          fi
+      - name: Commit
+        if: always()
+        run: |
+          git config user.email ci@local && git config user.name ci
+          git add -f MP3-REPORT.txt 2>/dev/null || true
+          git add -f content.mp3 2>/dev/null || true
+          git commit -m "getmp3: result" || true
+          git pull --rebase -q origin main || true
+          git push || true
