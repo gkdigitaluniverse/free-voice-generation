@@ -1,0 +1,9 @@
+date: Mon Nov 23 12:01:22 UTC 2026
+attempt 1: plain curl
+HTTP 200 bytes 176829
+got.mp3: Audio file with ID3 version 2.4.0, contains: MPEG ADTS, layer III, v1, 128 kbps, 44.1 kHz, Monaural
+TSSE
+Lavf63.1.102GEOB
+application/c2pa
+SUCCESS 176829 bytes
+/home/runner/work/_temp/6fec9610-0669-4d9d-a96d-5fdb31004038.sh: line 16: ffprobe: command not found
